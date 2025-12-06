@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Layout from '@/components/Layout';
-import OrderMap from '@/components/OrderMap';
+import YandexMap from '@/components/YandexMap';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -133,7 +133,7 @@ const Home = () => {
             <Icon name="Map" size={20} className="text-primary" />
             <h2 className="text-xl font-bold">Карта маршрутов</h2>
           </div>
-          <OrderMap 
+          <YandexMap 
             orders={activeOrders.map(order => ({
               id: order.id,
               address: order.address,
