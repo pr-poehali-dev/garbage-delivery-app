@@ -1,12 +1,14 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Switch } from '@/components/ui/switch';
 import Icon from '@/components/ui/icon';
-import { useState } from 'react';
 
 const Profile = () => {
+  const navigate = useNavigate();
   const [notifications, setNotifications] = useState(true);
   const [soundEnabled, setSoundEnabled] = useState(true);
 
@@ -27,10 +29,10 @@ const Profile = () => {
   ];
 
   const menuItems = [
-    { icon: 'Wallet', label: 'Баланс и выплаты', action: () => {} },
-    { icon: 'FileText', label: 'Документы', action: () => {} },
-    { icon: 'HelpCircle', label: 'Помощь и поддержка', action: () => {} },
-    { icon: 'Settings', label: 'Настройки', action: () => {} },
+    { icon: 'Wallet', label: 'Баланс и выплаты', path: '/wallet' },
+    { icon: 'FileText', label: 'Документы', path: '/documents' },
+    { icon: 'HelpCircle', label: 'Помощь и поддержка', path: '/support' },
+    { icon: 'Settings', label: 'Настройки', path: '/settings' },
   ];
 
   return (
@@ -106,7 +108,7 @@ const Profile = () => {
                 key={index}
                 variant="ghost"
                 className="w-full justify-start gap-3 h-auto py-3"
-                onClick={item.action}
+                onClick={() => navigate(item.path)}
               >
                 <Icon name={item.icon} size={20} className="text-primary" />
                 <span className="flex-1 text-left">{item.label}</span>
