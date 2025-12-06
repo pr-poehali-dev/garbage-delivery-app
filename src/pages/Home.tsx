@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Layout from '@/components/Layout';
+import OrderMap from '@/components/OrderMap';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -12,6 +13,8 @@ interface Order {
   status: 'pending' | 'active' | 'completed';
   time: string;
   price: string;
+  lat: number;
+  lng: number;
 }
 
 const Home = () => {
@@ -23,6 +26,8 @@ const Home = () => {
       status: 'active',
       time: '14:30',
       price: '350 ₽',
+      lat: 55.7558,
+      lng: 37.6173,
     },
     {
       id: 2,
@@ -31,6 +36,8 @@ const Home = () => {
       status: 'pending',
       time: '15:00',
       price: '280 ₽',
+      lat: 55.7645,
+      lng: 37.6385,
     },
     {
       id: 3,
@@ -39,8 +46,15 @@ const Home = () => {
       status: 'pending',
       time: '15:30',
       price: '420 ₽',
+      lat: 55.7412,
+      lng: 37.6289,
     },
   ]);
+
+  const courierLocation = {
+    lat: 55.7522,
+    lng: 37.6256,
+  };
 
   const stats = {
     today: 5,
@@ -112,6 +126,24 @@ const Home = () => {
               <p className="text-xs text-muted-foreground">Рейтинг</p>
             </CardContent>
           </Card>
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <Icon name="Map" size={20} className="text-primary" />
+            <h2 className="text-xl font-bold">Карта маршрутов</h2>
+          </div>
+          <OrderMap 
+            orders={activeOrders.map(order => ({
+              id: order.id,
+              address: order.address,
+              lat: order.lat,
+              lng: order.lng,
+              status: order.status,
+              price: order.price,
+            }))}
+            courierLocation={courierLocation}
+          />
         </div>
 
         <Card>
